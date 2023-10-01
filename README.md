@@ -56,3 +56,12 @@ Check if it works:
 
 	$ cd ../examples/full_python/
 	$ python3 test.py
+
+## Compiling using Microsoft Visual Studio
+
+See the `install_win.bat` file for example commands to compile py_aff3ct on Windows.  These commands assume you have the following installed:
+ * Microsoft Visual Studio 2017 with the appropriate options for compiling C++ code
+ * Doxygen
+ * CMake 
+
+These commands also assume you have installed the dependencies in requirements.txt to your Python environment.
