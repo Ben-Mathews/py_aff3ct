@@ -5,6 +5,7 @@ import re
 import filecmp
 from subprocess import call
 import copy
+import shutil
 
 class bcolors:
     HEADER    = '\033[95m'
@@ -313,7 +314,7 @@ def src_repair(template_src_path, src_path, verbose):
 			if not Path(src_currentpath).is_dir():
 				if verbose:
 					print("Folder not found ", src_currentpath, ", replaced by ", tplt_currentpath)
-				call('cp -R ' + tplt_currentpath + ' ' + src_currentpath, shell=True)
+				shutil.copytree(tplt_currentpath, src_currentpath)
 			else:
 				for file in files:
 					template_file_path = os.path.join(tplt_currentpath, file)
@@ -322,17 +323,17 @@ def src_repair(template_src_path, src_path, verbose):
 						if not filecmp.cmp(template_file_path, file_path):
 							if verbose:
 								print("Detected change in ", file_path, ", it will be replaced by ", template_file_path)
-							call('cp -f ' + template_file_path + ' ' + file_path, shell=True)
+							shutil.copytree(template_file_path, file_path)
 					else:
 						if verbose:
 							print("File not found ", file_path, ", it will be replaced by ", template_file_path)
 
-						call('cp ' + template_file_path + ' ' + file_path, shell=True)
+						shutil.copytree(template_file_path, file_path)
 	else:
 		if Path(template_src_path).is_dir():
 			if verbose:
 				print("Copy folder ", template_src_path, ", into ", src_path)
-			call('cp -R ' + template_src_path + ' ' + src_path, shell=True)
+			shutil.copytree(template_src_path, src_path)
 		else:
 			print("Template folder not found.")
 
