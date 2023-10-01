@@ -3,8 +3,13 @@ cmake_policy(SET CMP0054 NEW)
 
 project (py_aff3ct_test)
 
-# Enable C++11
-set(CMAKE_CXX_STANDARD 11)
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
+    # We need to use latest C++ if using Visual Studio
+    set(CMAKE_CXX_STANDARD 20)
+else()
+    # Enable C++11
+    set(CMAKE_CXX_STANDARD 11)
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Specify lib path
